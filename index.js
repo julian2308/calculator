@@ -39,7 +39,17 @@ const btns = [
 
 const itIsNan = () => {
   replaceOnDisplay("I can't do this");
-  
+  setTimeout(() => {
+    replaceOnDisplay(""), 1;
+  });
+};
+
+const isItNan = (posibleNan) => {
+  if (isNaN(posibleNan)) {
+    itIsNan();
+  } else {
+    replaceOnDisplay(posibleNan);
+  }
 };
 
 const writeOnDisplay = (text) => {
@@ -74,13 +84,7 @@ btnE.addEventListener("click", () => {
   if (stringOnDisplay.includes("/")) {
     const numbers = stringOnDisplay.split("/");
     const result = numbers[0] / numbers[1];
-    console.log(result);
-    if (isNaN(result)) {
-      itIsNan()
-    } else {
-      replaceOnDisplay(result);
-    }
-
+    isItNan(result);
     canIDelete = false;
   }
 
@@ -88,14 +92,15 @@ btnE.addEventListener("click", () => {
     const numbers = stringOnDisplay.split("x");
     const result = numbers[0] * numbers[1];
     replaceOnDisplay(result);
+    isItNan(result);
     canIDelete = false;
   }
 
   if (stringOnDisplay.includes("-")) {
     const numbers = stringOnDisplay.split("-");
     const result = numbers[0] - numbers[1];
-    console.log(result);
     replaceOnDisplay(result);
+    isItNan(result);
     canIDelete = false;
   }
 
@@ -103,7 +108,7 @@ btnE.addEventListener("click", () => {
     const numbers = stringOnDisplay.split("+");
     const result = Number(numbers[0]) + Number(numbers[1]);
     replaceOnDisplay(result);
+    isItNan(result);
     canIDelete = false;
-    console.log(canIDelete);
   }
 });

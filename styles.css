@@ -47,6 +47,7 @@ body {
     vertical-align: middle;
     color: gray;
     font-size: x-large;
+    cursor: pointer;
 }
 
 .act-btn{

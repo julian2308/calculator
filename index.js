@@ -48,7 +48,7 @@ const isItNan = (posibleNan) => {
   if (isNaN(posibleNan)) {
     itIsNan();
   } else {
-    replaceOnDisplay(posibleNan);
+    replaceOnDisplay(posibleNan.toFixed(2));
   }
 };
 
@@ -91,7 +91,6 @@ btnE.addEventListener("click", () => {
   if (stringOnDisplay.includes("x")) {
     const numbers = stringOnDisplay.split("x");
     const result = numbers[0] * numbers[1];
-    replaceOnDisplay(result);
     isItNan(result);
     canIDelete = false;
   }
@@ -99,7 +98,6 @@ btnE.addEventListener("click", () => {
   if (stringOnDisplay.includes("-")) {
     const numbers = stringOnDisplay.split("-");
     const result = numbers[0] - numbers[1];
-    replaceOnDisplay(result);
     isItNan(result);
     canIDelete = false;
   }
@@ -107,7 +105,6 @@ btnE.addEventListener("click", () => {
   if (stringOnDisplay.includes("+")) {
     const numbers = stringOnDisplay.split("+");
     const result = Number(numbers[0]) + Number(numbers[1]);
-    replaceOnDisplay(result);
     isItNan(result);
     canIDelete = false;
   }

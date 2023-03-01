@@ -7,10 +7,20 @@ body {
     margin-top: 5vh;
 }
 
+.calculator{
+
+    border: solid 5px black;
+}
+
 .screen {
-    width: 404.1px;
+    width: 408.1px;
     height: 100px;
-    background-color: #2092d8;
+    background-color: #6cc7ff;
+    border-bottom: solid 0.5px gray;
+    font-size: 60px;
+    text-align: right;
+    vertical-align: middle;
+    line-height: 100px;
 }
 
 .rows {
@@ -22,27 +32,36 @@ body {
     flex-direction: row;
 }
 
+.special-row{
+    display: flex;
+}
+
 .btn {
     width: 100px;
     height: 100px;
     place-items: center;
-    background-color: #2092d8;
+    background-color: #6cc7ff;
     border: solid gray 0.3px;
     line-height: 100px;
     text-align: center;
     vertical-align: middle;
+    color: gray;
+    font-size: x-large;
 }
 
 .act-btn{
-
+    color: white;
     background-color: #20dad8;
 }
 
 .btn-0 {
     width: 200px;
+    padding-right: 2px;
 }
 
 .btn-e {
     height: 200px;
     background-color: #ff7d1f;
+    padding-bottom: 2px;
+    color: white;
 }

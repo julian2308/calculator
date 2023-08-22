@@ -1,4 +1,5 @@
 const screen = document.getElementById("screen");
+const history = document.getElementById("history");
 const btn0 = document.getElementById("btn-0");
 const btn1 = document.getElementById("btn-1");
 const btn2 = document.getElementById("btn-2");
@@ -17,7 +18,17 @@ const btnP = document.getElementById("btn-.");
 const btnI = document.getElementById("btn-+");
 const btnM = document.getElementById("btn--");
 const btnE = document.getElementById("btn-e");
+const btn000 = document.getElementById("btn-000");
+const btnZ = document.getElementById("btn-Z");
+const btnClean = document.getElementById("btn-clean");
+
+
 let canIDelete = true;
+const btnColor = document.getElementById("btn-color");
+
+btnColor.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+});
 
 const btns = [
   btn0,
@@ -35,6 +46,8 @@ const btns = [
   btnP,
   btnI,
   btnM,
+  btn000,
+  btnZ,
 ];
 
 const itIsNan = () => {
@@ -48,7 +61,11 @@ const isItNan = (posibleNan) => {
   if (isNaN(posibleNan)) {
     itIsNan();
   } else {
-    replaceOnDisplay(posibleNan.toFixed(2));
+    const possibleText = posibleNan.toFixed(2);
+    possibleText[possibleText.length - 1] == 0 &&
+    possibleText[possibleText.length - 2]
+      ? replaceOnDisplay(posibleNan.toFixed(0))
+      : replaceOnDisplay(posibleNan.toFixed(2));
   }
 };
 
@@ -78,14 +95,35 @@ btns.forEach((button) => {
   });
 });
 
+const addToHistory = (className, text) => {
+  history.innerHTML += `<p class=${className}>${text}</p>`;
+};
+
+const cleanHistory = () => {
+  history.innerHTML = "";
+};
+
+btnClean.addEventListener("click", cleanHistory);
+
 btnE.addEventListener("click", () => {
   const stringOnDisplay = String(screen.innerHTML);
+
+  addToHistory("operation", stringOnDisplay);
 
   if (stringOnDisplay.includes("/")) {
     const numbers = stringOnDisplay.split("/");
     const result = numbers[0] / numbers[1];
     isItNan(result);
     canIDelete = false;
+    addToHistory("finalResult", result);
+  }
+
+  if (stringOnDisplay.includes("%")) {
+    const numbers = stringOnDisplay.split("%");
+    const result = numbers[0] % numbers[1];
+    isItNan(result);
+    canIDelete = false;
+    addToHistory("finalResult", result);
   }
 
   if (stringOnDisplay.includes("x")) {
@@ -93,6 +131,7 @@ btnE.addEventListener("click", () => {
     const result = numbers[0] * numbers[1];
     isItNan(result);
     canIDelete = false;
+    addToHistory("finalResult", result);
   }
 
   if (stringOnDisplay.includes("-")) {
@@ -100,6 +139,7 @@ btnE.addEventListener("click", () => {
     const result = numbers[0] - numbers[1];
     isItNan(result);
     canIDelete = false;
+    addToHistory("finalResult", result);
   }
 
   if (stringOnDisplay.includes("+")) {
@@ -107,5 +147,9 @@ btnE.addEventListener("click", () => {
     const result = Number(numbers[0]) + Number(numbers[1]);
     isItNan(result);
     canIDelete = false;
+    addToHistory("finalResult", result);
+    btnClean.addEventListener("click", () => {
+      console.log(history.innerHTML);
+    });
   }
 });
